@@ -14,11 +14,28 @@ public class StringCode {
 	 * @return max run length
 	 */
 	public static int maxRun(String str) {
-		return 0; // YOUR CODE HERE
+		int maxRun = 0;
+		char currentChar;
+		char previousChar = 0;
+		int count = 1;
+		
+		for(int i=0; i<str.length(); i++) {
+			currentChar = str.charAt(i);
+			if(i>0) previousChar = str.charAt(i-1);
+			if(currentChar == previousChar) {
+				count++;
+			}else {
+				if(count > maxRun) maxRun = count;
+				count = 1;
+			}
+		}
+		return maxRun;
 	}
 	
 	public static void main(String[] args) {
-		blowup("");
+		//blowup("");
+		int maxRun = maxRun("1112233");
+		System.out.println("Max Run : " + maxRun);
 	}
 	
 	/**
