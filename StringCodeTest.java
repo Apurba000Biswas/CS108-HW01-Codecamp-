@@ -60,7 +60,34 @@ public class StringCodeTest extends TestCase {
 		assertEquals(2, StringCode.maxRun("112233"));
 		assertEquals(3, StringCode.maxRun("1112233"));
 	}
-
-	// Need test cases for stringIntersect
+	
+	
+	//
+	// subStringIntersect
+	//
+	public void testSubString1() {
+		// basic case
+		assertEquals(true, StringCode.stringIntersect("aaa", "aaab", 2));
+		assertEquals(false, StringCode.stringIntersect("aaa", "bbbb", 2));
+		assertEquals(false, StringCode.stringIntersect("bba", "aaab", 2));
+	}
+	
+	public void testSubString2() {
+		// more length with digit
+		assertEquals(true, StringCode.stringIntersect("baaab", "aaab", 3));
+		assertEquals(true, StringCode.stringIntersect("baaabxxxdgg", "aaabxxdgg", 3));
+		assertEquals(true, StringCode.stringIntersect("apurba biswas", "apurba", 6));
+		assertEquals(false, StringCode.stringIntersect("", "aaab", 1));
+		assertEquals(false, StringCode.stringIntersect("", "", 1));
+		assertEquals(false, StringCode.stringIntersect("aaa345b", "abab", 2));
+		assertEquals(false, StringCode.stringIntersect("zxsd89bba", "aaab", 2));
+	}
+	
+	public void testSubString3() {
+		// wired character
+		assertEquals(true, StringCode.stringIntersect("A*>~ABD", "AaBDb*<!", 2));
+		assertEquals(false, StringCode.stringIntersect("% hg 21 KmnvR", "23420gBSF", 2));
+		assertEquals(true, StringCode.stringIntersect("&&&gd", "BBnsdg&& hsj", 2));
+	}
 	
 }

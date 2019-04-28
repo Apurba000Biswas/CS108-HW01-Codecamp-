@@ -32,12 +32,6 @@ public class StringCode {
 		return maxRun;
 	}
 	
-	public static void main(String[] args) {
-		//blowup("");
-		int maxRun = maxRun("1112233");
-		System.out.println("Max Run : " + maxRun);
-	}
-	
 	/**
 	 * Given a string, for each digit in the original string,
 	 * replaces the digit with that many occurrences of the character
@@ -85,7 +79,37 @@ public class StringCode {
 	 * which appear in both strings.
 	 * Compute this in linear time using a HashSet. Len will be 1 or more.
 	 */
-	public static boolean stringIntersect(String a, String b, int len) {
-		return false; // YOUR CODE HERE
+	public static boolean stringIntersect(String str1, String str2, int len) {
+		
+		Set<String> subStringsFor1 = getSubStrings(str1, len);
+		Set<String> subStringsFor2 = getSubStrings(str2, len);
+		
+		for(String curSub : subStringsFor1) {
+			if(subStringsFor2.contains(curSub)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private static Set<String> getSubStrings(String str, int len){
+		Set<String> subStrings = new HashSet<String>();
+		
+		for(int i=0; i<=str.length()-len; i++) {
+			String subString = buildSubString(str, i, len);
+			subStrings.add(subString);
+		}
+		if(str.length() == len)subStrings.add(str);
+		return subStrings;
+	}
+	
+	private static String buildSubString(String str, int pos, int len) {
+		StringBuilder sb = new StringBuilder();
+		while(len > 0) {
+			sb.append(str.charAt(pos));
+			pos++;
+			len--;
+		}
+		return sb.toString();
 	}
 }
